@@ -5,12 +5,16 @@
 #define PERCEPTRON_H
 class perceptron{
 private:
-	double new_weight, old_weight, threshold;
+	std::vector<double> weights;
+	std::vector<int> input;
+	double learning_rate;
+	int output
 public:
 	perceptron();
 	~perceptron();
 	void to_string();
-	void set_new_weight();
-	void set_old_weight();
+	void set_weights(std::vector<double>);
+	void set_inputs(std::vector<int>);
+	void set_learning_rate(double);
 };
 #endif
