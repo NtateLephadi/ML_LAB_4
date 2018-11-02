@@ -28,6 +28,11 @@ void perceptron::set_output(int i){
 	this->output = i;
 }
 
+void perceptron::set_target(int t) {
+	/* code */
+	this->target=t;
+}
+
 double perceptron::product_sum(){
 
 	double product_sum=0;
@@ -39,6 +44,28 @@ double perceptron::product_sum(){
 
 	return product_sum;
 }
+
+void perceptron::activation_function(){
+	if(product_sum()>0){
+		this->target = 1;
+	}
+	else{
+		this->target = 0;
+	}
+}
+
+void perceptron::percepton_rule(){
+	this->activation_function();
+	for (size_t i = 0; i < 2; i++) {
+		/* code */
+		this->weights[i]=this->weights[i]+(
+			this->learning_rate*(
+				this->output-this->target*this->inputs[i]
+			)
+		);
+	}
+}
+
 void perceptron::to_string(){
 	std::cout << "weights" << '\n';
 	for (size_t i = 0; i < this->weights.size(); i++) {
@@ -57,4 +84,7 @@ void perceptron::to_string(){
 
 	std::cout << "output" << '\n';
 	std::cout << this->output << '\n';
+
+	std::cout << "target" << '\n';
+	std::cout << this->target << '\n';
 }
