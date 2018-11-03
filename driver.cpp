@@ -12,19 +12,17 @@ int main(int argc, char const *argv[]) {
     }
   );
   p.set_target(
-    {1, 0, 0, 0}
+    {1, 1, 1, 0}
   );
 
-  p.set_learning_rate(0.6);
+  p.set_learning_rate(0.5);
   p.to_string();
 
-  do {
-
+  for (size_t i = 0; i < 10; i++) {
     /* code */
     p.percepton_rule();
     p.to_string();
-
-  } while(p.find_error());
+  }
 
   return 0;
 }

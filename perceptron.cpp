@@ -45,7 +45,7 @@ std::vector<double> perceptron::product_sum(){
 	for (size_t j = 0; j < this->weights.size(); j++) {
 		/* code */
 		product_sum=0;
-		for (size_t i = 0; i < this->weights[i].size(); i++) {
+		for (size_t i = 0; i < this->weights[j].size(); i++) {
 			/* code */
 			product_sum+=this->weights[j][i]*this->inputs[j][i];
 		}
@@ -69,13 +69,15 @@ void perceptron::activation_function(){
 
 void perceptron::percepton_rule(){
 	this->activation_function();
-	for (size_t j = 0; j < this->target.size(); j++) {
+	for (size_t j = 0; j < this->weights.size(); j++) {
 		/* code */
-		for (size_t i = 0; i < 2; i++) {
+		for (size_t i = 0; i < this->weights[j].size(); i++) {
 			/* code */
 			this->weights[j][i]=this->weights[j][i]+(
 				this->learning_rate*(
-					this->target[j]-this->output[j]*this->inputs[j][i]
+					(
+						this->target[i]-this->output[i]
+					)*this->inputs[j][i]
 				)
 			);
 		}
@@ -86,7 +88,7 @@ bool perceptron::find_error(){
 	bool error = false;
 	for (size_t i = 0; i < this->target.size(); i++) {
 		/* code */
-		if (this->target[i]-this->output[i]!=0) {
+		if (this->target[i]!=this->output[i]) {
 			/* code */
 			error = true;
 		}
@@ -127,10 +129,4 @@ void perceptron::to_string(){
 		/* code */
 		std::cout << this->target[i] << '\n';
 	}
-
-	std::cout << "error" << '\n';
-	// for (size_t i = 0; i < this->target.size(); i++) {
-	// 	/* code */
-	// 	std::cout << this->target[i]-this->output[i] << '\n';
-	// }
 }
